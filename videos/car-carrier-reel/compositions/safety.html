@@ -1,0 +1,105 @@
+<html
+  data-composition-variables='[
+    {"id":"safety-title","type":"string","label":"Title","default":"Enclosed carrier."},
+    {"id":"safety-p1","type":"string","label":"Point 1","default":"100% insured transit"},
+    {"id":"safety-p2","type":"string","label":"Point 2","default":"Live GPS tracking"},
+    {"id":"safety-p3","type":"string","label":"Point 3","default":"Doorstep pickup & drop"}
+  ]'
+>
+  <template>
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        font-family: "Montserrat", sans-serif;
+        color: #fff;
+      }
+      #safety-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 42, 74, 0.9) 0%,
+          rgba(15, 42, 74, 0.7) 45%,
+          rgba(15, 42, 74, 0.05) 72%
+        );
+      }
+      #safety-copy {
+        position: absolute;
+        left: 120px;
+        top: 320px;
+        width: 760px;
+      }
+      #safety-title {
+        display: block;
+        font-weight: 900;
+        font-size: 96px;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
+      .safety-chip {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin-top: 26px;
+        font-weight: 700;
+        font-size: 44px;
+      }
+      .safety-chip:first-of-type {
+        margin-top: 44px;
+      }
+      .safety-tick {
+        flex: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--orange, #f28c1e);
+        color: var(--navy, #0f2a4a);
+        font-weight: 900;
+        font-size: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+    <div id="root" data-composition-id="safety" data-width="1080" data-height="1920">
+      <div id="safety-scrim" class="clip" data-start="0" data-duration="2.5"></div>
+      <div id="safety-copy" class="clip" data-start="0" data-duration="2.5">
+        <span id="safety-title" data-var-text="safety-title">Enclosed carrier.</span>
+        <div id="safety-c1" class="safety-chip">
+          <span class="safety-tick">✓</span><span data-var-text="safety-p1">100% insured transit</span>
+        </div>
+        <div id="safety-c2" class="safety-chip">
+          <span class="safety-tick">✓</span><span data-var-text="safety-p2">Live GPS tracking</span>
+        </div>
+        <div id="safety-c3" class="safety-chip">
+          <span class="safety-tick">✓</span><span data-var-text="safety-p3">Doorstep pickup &amp; drop</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Whip in from below, matching the hook's upward exit.
+      tl.fromTo(
+        "#safety-title",
+        { y: 120, opacity: 0, filter: "blur(10px)" },
+        { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "expo.out" },
+        0,
+      );
+      tl.fromTo(
+        ".safety-chip",
+        { x: -40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.35, ease: "power4.out", stagger: 0.18 },
+        0.3,
+      );
+      // Exit: copy blurs out, scrim floods navy into the next world.
+      tl.to(
+        "#safety-copy",
+        { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power3.in" },
+        2.12,
+      );
+      tl.to("#safety-scrim", { background: "rgba(15,42,74,1)", duration: 0.3, ease: "power2.inOut" }, 2.15);
+      window.__timelines["safety"] = tl;
+    </script>
+  </template>
+</html>

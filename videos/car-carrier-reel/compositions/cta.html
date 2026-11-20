@@ -1,0 +1,155 @@
+<html
+  data-composition-variables='[
+    {"id":"cta-head","type":"string","label":"CTA headline","default":"Get a FREE quote"},
+    {"id":"cta-phone","type":"string","label":"Phone","default":"93342 65955"},
+    {"id":"cta-site","type":"string","label":"Website","default":"carcarrierservices.in"},
+    {"id":"cta-note","type":"string","label":"Footnote","default":"IBA approved bills · 24/7 WhatsApp"}
+  ]'
+>
+  <template>
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        font-family: "Montserrat", sans-serif;
+        color: #fff;
+      }
+      #cta-ground {
+        position: absolute;
+        inset: 0;
+        background: var(--navy, #0f2a4a);
+      }
+      #cta-photo-wrap {
+        position: absolute;
+        left: 0;
+        top: 1000px;
+        width: 1080px;
+        height: 920px;
+        overflow: hidden;
+      }
+      /* Crop to the truck only: source x 640-1280 (the left half has baked-in text). */
+      #cta-photo {
+        position: absolute;
+        left: -1082px;
+        top: -254px;
+        width: 2163px;
+        height: 1217px;
+      }
+      #cta-photo-fade {
+        position: absolute;
+        left: 0;
+        top: 1000px;
+        width: 1080px;
+        height: 380px;
+        background: linear-gradient(180deg, var(--navy, #0f2a4a) 10%, rgba(15, 42, 74, 0) 100%);
+      }
+      #cta-flood {
+        position: absolute;
+        inset: 0;
+        background: var(--orange, #f28c1e);
+        transform-origin: 50% 100%;
+      }
+      #cta-copy {
+        position: absolute;
+        left: 120px;
+        top: 300px;
+        width: 760px;
+      }
+      #cta-logo {
+        display: block;
+        width: 700px;
+        height: auto;
+      }
+      #cta-head {
+        display: block;
+        margin-top: 70px;
+        font-weight: 900;
+        font-size: 92px;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
+      #cta-phone-row {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-top: 40px;
+        background: var(--orange, #f28c1e);
+        color: var(--navy, #0f2a4a);
+        border-radius: 22px;
+        padding: 26px 34px;
+        width: 740px;
+      }
+      #cta-phone-icon {
+        font-size: 60px;
+        line-height: 1;
+      }
+      #cta-phone {
+        font-weight: 900;
+        font-size: 76px;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+      }
+      #cta-site {
+        display: block;
+        margin-top: 40px;
+        font-weight: 700;
+        font-size: 46px;
+      }
+      #cta-note {
+        display: block;
+        margin-top: 14px;
+        font-weight: 400;
+        font-size: 32px;
+        color: #d9e3f0;
+      }
+    </style>
+    <div id="root" data-composition-id="cta" data-width="1080" data-height="1920">
+      <div id="cta-ground" class="clip" data-start="0" data-duration="2.5"></div>
+      <div id="cta-photo-wrap" class="clip" data-start="0" data-duration="2.5" data-layout-ignore>
+        <img id="cta-photo" src="assets/pan-india.webp" alt="" />
+      </div>
+      <div id="cta-photo-fade" class="clip" data-start="0" data-duration="2.5" data-layout-ignore></div>
+      <div id="cta-flood" class="clip" data-start="0" data-duration="2.5"></div>
+      <div id="cta-copy" class="clip" data-start="0" data-duration="2.5">
+        <img id="cta-logo" src="assets/logo.png" alt="Car Carrier Services" />
+        <span id="cta-head" data-var-text="cta-head">Get a FREE quote</span>
+        <div id="cta-phone-row">
+          <span id="cta-phone-icon">📞</span>
+          <span id="cta-phone" data-var-text="cta-phone">93342 65955</span>
+        </div>
+        <span id="cta-site" data-var-text="cta-site">carcarrierservices.in</span>
+        <span id="cta-note" data-var-text="cta-note">IBA approved bills · 24/7 WhatsApp</span>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Orange flood sweeps up and away, revealing the navy end card.
+      tl.fromTo("#cta-flood", { scaleY: 1 }, { scaleY: 0, duration: 0.3, ease: "power2.inOut" }, 0);
+      tl.fromTo(
+        "#cta-logo",
+        { opacity: 0, filter: "blur(8px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" },
+        0.12,
+      );
+      tl.fromTo(
+        "#cta-head",
+        { opacity: 0, filter: "blur(6px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" },
+        0.2,
+      );
+      tl.fromTo(
+        "#cta-phone-row",
+        { opacity: 0, scale: 0.85 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" },
+        0.26,
+      );
+      tl.fromTo(
+        ["#cta-site", "#cta-note"],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.15, ease: "power2.out", stagger: 0.06 },
+        0.3,
+      );
+      window.__timelines["cta"] = tl;
+    </script>
+  </template>
+</html>

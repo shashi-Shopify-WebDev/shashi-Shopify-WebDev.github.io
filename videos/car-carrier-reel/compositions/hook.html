@@ -1,0 +1,91 @@
+<html
+  data-composition-variables='[
+    {"id":"hook-tag","type":"string","label":"Hook tag","default":"PATNA → ALL INDIA"},
+    {"id":"hook-l1","type":"string","label":"Hook line 1","default":"Shifting"},
+    {"id":"hook-l2","type":"string","label":"Hook line 2","default":"your car?"}
+  ]'
+>
+  <template>
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        font-family: "Montserrat", sans-serif;
+        color: #fff;
+      }
+      #hook-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 42, 74, 0.92) 0%,
+          rgba(15, 42, 74, 0.75) 38%,
+          rgba(15, 42, 74, 0) 62%
+        );
+      }
+      #hook-copy {
+        position: absolute;
+        left: 120px;
+        top: 320px;
+        width: 760px;
+      }
+      #hook-tag {
+        display: inline-block;
+        background: var(--orange, #f28c1e);
+        color: var(--navy, #0f2a4a);
+        font-weight: 900;
+        font-size: 34px;
+        letter-spacing: 0.06em;
+        padding: 12px 22px;
+        border-radius: 8px;
+      }
+      .hook-line {
+        display: block;
+        font-weight: 900;
+        font-size: 136px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      #hook-l1 {
+        margin-top: 34px;
+      }
+      #hook-l2 {
+        color: var(--orange, #f28c1e);
+        margin-top: 10px;
+      }
+    </style>
+    <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
+      <div id="hook-scrim" class="clip" data-start="0" data-duration="2.5"></div>
+      <div id="hook-copy" class="clip" data-start="0" data-duration="2.5">
+        <span id="hook-tag" data-var-text="hook-tag">PATNA → ALL INDIA</span>
+        <span id="hook-l1" class="hook-line" data-var-text="hook-l1">Shifting</span>
+        <span id="hook-l2" class="hook-line" data-var-text="hook-l2">your car?</span>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Frame 0 already reads: tag + line 1 visible, line 2 lands fast.
+      tl.fromTo("#hook-tag", { opacity: 1, x: 0 }, { opacity: 1, x: 0, duration: 0.01 }, 0);
+      tl.fromTo(
+        "#hook-l1",
+        { opacity: 1, filter: "blur(0px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.01 },
+        0,
+      );
+      tl.fromTo(
+        "#hook-l2",
+        { opacity: 0, filter: "blur(8px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" },
+        0.12,
+      );
+      // Exit: whip up with blur before the cut to the loading shot.
+      tl.to(
+        "#hook-copy",
+        { y: -140, opacity: 0, filter: "blur(10px)", duration: 0.22, ease: "power3.in" },
+        2.24,
+      );
+      tl.to("#hook-scrim", { opacity: 0.6, duration: 0.22, ease: "power2.in" }, 2.24);
+      window.__timelines["hook"] = tl;
+    </script>
+  </template>
+</html>
