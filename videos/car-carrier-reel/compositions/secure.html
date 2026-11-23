@@ -1,0 +1,84 @@
+<html
+  data-composition-variables='[
+    {"id":"secure-big","type":"string","label":"Big number","default":"0 km"},
+    {"id":"secure-line","type":"string","label":"Line","default":"added to your odometer."}
+  ]'
+>
+  <template>
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        font-family: "Montserrat", sans-serif;
+        color: #fff;
+      }
+      #secure-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 42, 74, 0.92) 0%,
+          rgba(15, 42, 74, 0.72) 40%,
+          rgba(15, 42, 74, 0) 64%
+        );
+      }
+      #secure-copy {
+        position: absolute;
+        left: 120px;
+        top: 350px;
+        width: 760px;
+      }
+      #secure-big {
+        display: block;
+        font-weight: 900;
+        font-size: 220px;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        color: var(--orange, #f28c1e);
+      }
+      #secure-line {
+        display: block;
+        margin-top: 10px;
+        font-weight: 800;
+        font-size: 56px;
+        line-height: 1.1;
+      }
+      #secure-sub {
+        display: inline-block;
+        margin-top: 34px;
+        font-weight: 700;
+        font-size: 36px;
+        padding: 14px 22px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 2px solid rgba(255, 255, 255, 0.35);
+      }
+    </style>
+    <div id="root" data-composition-id="secure" data-width="1080" data-height="1920">
+      <div id="secure-scrim" class="clip" data-start="0" data-duration="2.4"></div>
+      <div id="secure-copy" class="clip" data-start="0" data-duration="2.4">
+        <span id="secure-big" data-var-text="secure-big">0 km</span>
+        <span id="secure-line" data-var-text="secure-line">added to your odometer.</span>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Big number punches in slightly large and settles (spring ~0.8).
+      tl.fromTo(
+        "#secure-big",
+        { scale: 1.35, opacity: 0, filter: "blur(10px)", transformOrigin: "0% 50%" },
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "back.out(1.4)" },
+        0,
+      );
+      tl.fromTo(
+        "#secure-line",
+        { opacity: 0, filter: "blur(6px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" },
+        0.12,
+      );
+      tl.to("#secure-copy", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power3.in" }, 2.18);
+      tl.to("#secure-scrim", { background: "rgba(15,42,74,1)", duration: 0.3, ease: "power2.inOut" }, 2.1);
+      window.__timelines["secure"] = tl;
+    </script>
+  </template>
+</html>

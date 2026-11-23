@@ -63,8 +63,8 @@
       }
     </style>
     <div id="root" data-composition-id="safety" data-width="1080" data-height="1920">
-      <div id="safety-scrim" class="clip" data-start="0" data-duration="2.5"></div>
-      <div id="safety-copy" class="clip" data-start="0" data-duration="2.5">
+      <div id="safety-scrim" class="clip" data-start="0" data-duration="2.4"></div>
+      <div id="safety-copy" class="clip" data-start="0" data-duration="2.4">
         <span id="safety-title" data-var-text="safety-title">Enclosed carrier.</span>
         <div id="safety-c1" class="safety-chip">
           <span class="safety-tick">✓</span><span data-var-text="safety-p1">100% insured transit</span>
@@ -96,9 +96,8 @@
       tl.to(
         "#safety-copy",
         { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power3.in" },
-        2.12,
+        2.06,
       );
-      tl.to("#safety-scrim", { background: "rgba(15,42,74,1)", duration: 0.3, ease: "power2.inOut" }, 2.15);
       window.__timelines["safety"] = tl;
     </script>
   </template>

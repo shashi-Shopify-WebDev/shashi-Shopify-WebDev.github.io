@@ -1,0 +1,102 @@
+<html
+  data-composition-variables='[
+    {"id":"routes-from","type":"string","label":"Origin","default":"Patna"},
+    {"id":"routes-c1","type":"string","label":"City 1","default":"Delhi NCR"},
+    {"id":"routes-c2","type":"string","label":"City 2","default":"Mumbai"},
+    {"id":"routes-c3","type":"string","label":"City 3","default":"Bangalore"},
+    {"id":"routes-c4","type":"string","label":"City 4","default":"Hyderabad"}
+  ]'
+>
+  <template>
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        font-family: "Montserrat", sans-serif;
+        color: #fff;
+      }
+      #routes-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 42, 74, 0.92) 0%,
+          rgba(15, 42, 74, 0.75) 42%,
+          rgba(15, 42, 74, 0) 66%
+        );
+      }
+      #routes-copy {
+        position: absolute;
+        left: 120px;
+        top: 310px;
+        width: 760px;
+      }
+      #routes-from {
+        display: block;
+        font-weight: 900;
+        font-size: 104px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      #routes-arrow {
+        display: block;
+        margin-top: 14px;
+        font-weight: 900;
+        font-size: 44px;
+        color: var(--orange, #f28c1e);
+        letter-spacing: 0.04em;
+      }
+      #routes-list {
+        margin-top: 20px;
+      }
+      .routes-city {
+        display: block;
+        font-weight: 800;
+        font-size: 60px;
+        line-height: 1.18;
+        color: #fff;
+      }
+      .routes-city b {
+        color: var(--orange, #f28c1e);
+        font-weight: 900;
+      }
+    </style>
+    <div id="root" data-composition-id="routes" data-width="1080" data-height="1920">
+      <div id="routes-scrim" class="clip" data-start="0" data-duration="2.4"></div>
+      <div id="routes-copy" class="clip" data-start="0" data-duration="2.4">
+        <span id="routes-from" data-var-text="routes-from">Patna</span>
+        <span id="routes-arrow">DOOR-TO-DOOR TO</span>
+        <div id="routes-list">
+          <span id="routes-c1" class="routes-city"><b>→</b> <span data-var-text="routes-c1">Delhi NCR</span></span>
+          <span id="routes-c2" class="routes-city"><b>→</b> <span data-var-text="routes-c2">Mumbai</span></span>
+          <span id="routes-c3" class="routes-city"><b>→</b> <span data-var-text="routes-c3">Bangalore</span></span>
+          <span id="routes-c4" class="routes-city"><b>→</b> <span data-var-text="routes-c4">Hyderabad</span></span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Whip in from the right (the car drives right-to-left into the container).
+      tl.fromTo(
+        "#routes-from",
+        { x: 160, opacity: 0, filter: "blur(10px)" },
+        { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "expo.out" },
+        0,
+      );
+      tl.fromTo(
+        "#routes-arrow",
+        { opacity: 0, filter: "blur(6px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" },
+        0.2,
+      );
+      tl.fromTo(
+        ".routes-city",
+        { x: 60, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.3, ease: "power4.out", stagger: 0.12 },
+        0.3,
+      );
+      tl.to("#routes-copy", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power3.in" }, 2.12);
+      window.__timelines["routes"] = tl;
+    </script>
+  </template>
+</html>

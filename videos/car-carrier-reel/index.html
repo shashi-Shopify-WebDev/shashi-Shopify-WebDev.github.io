@@ -51,7 +51,7 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="10"
+      data-duration="15"
       data-width="1080"
       data-height="1920"
     >
@@ -61,7 +61,7 @@
         class="clip footage"
         src="assets/hero-mobile.mp4"
         data-start="0"
-        data-duration="2.5"
+        data-duration="2.4"
         data-media-start="5"
         data-track-index="0"
         muted
@@ -72,14 +72,53 @@
         id="shot-load"
         class="clip footage"
         src="assets/hero-mobile.mp4"
-        data-start="2.5"
-        data-duration="2.5"
+        data-start="2.4"
+        data-duration="2.4"
         data-media-start="12"
         data-track-index="0"
         muted
         playsinline
         style="z-index: 2"
       ></video>
+      <!-- HD loading footage (landscape source, cropped to 9:16) -->
+      <video
+        id="shot-ramp"
+        class="clip footage"
+        src="assets/hero-desktop.mp4"
+        data-start="4.8"
+        data-duration="2.4"
+        data-media-start="16.5"
+        data-track-index="0"
+        muted
+        playsinline
+        style="z-index: 3; object-position: 42% 50%"
+      ></video>
+      <video
+        id="shot-deck"
+        class="clip footage"
+        src="assets/hero-desktop.mp4"
+        data-start="7.2"
+        data-duration="2.4"
+        data-media-start="22"
+        data-track-index="0"
+        muted
+        playsinline
+        style="z-index: 4; object-position: 30% 50%"
+      ></video>
+
+      <!-- Music: "Driving Ambition" from Mixkit (Mixkit Stock Music Free License: ads on social platforms allowed, no attribution) -->
+      <audio
+        id="music-bgm"
+        class="clip"
+        src="assets/music/driving-ambition-mixkit.mp3"
+        data-start="0"
+        data-duration="15"
+        data-media-start="37.965"
+        data-track-index="3"
+        data-timeline-role="music"
+        data-volume="0.9"
+        data-fade-out="1.5"
+      ></audio>
 
       <!-- Scenes -->
       <div
@@ -87,7 +126,7 @@
         data-composition-id="hook"
         data-composition-src="compositions/hook.html"
         data-start="0"
-        data-duration="2.5"
+        data-duration="2.4"
         data-track-index="1"
         data-track-kind="graphics"
         data-width="1080"
@@ -98,8 +137,8 @@
         id="safety"
         data-composition-id="safety"
         data-composition-src="compositions/safety.html"
-        data-start="2.5"
-        data-duration="2.5"
+        data-start="2.4"
+        data-duration="2.4"
         data-track-index="1"
         data-track-kind="graphics"
         data-width="1080"
@@ -107,28 +146,52 @@
         style="z-index: 11"
       ></div>
       <div
-        id="trust"
-        data-composition-id="trust"
-        data-composition-src="compositions/trust.html"
-        data-start="5"
-        data-duration="2.5"
+        id="routes"
+        data-composition-id="routes"
+        data-composition-src="compositions/routes.html"
+        data-start="4.8"
+        data-duration="2.4"
         data-track-index="1"
         data-track-kind="graphics"
         data-width="1080"
         data-height="1920"
-        style="z-index: 12"
+        style="z-index: 14"
+      ></div>
+      <div
+        id="secure"
+        data-composition-id="secure"
+        data-composition-src="compositions/secure.html"
+        data-start="7.2"
+        data-duration="2.4"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 15"
+      ></div>
+      <div
+        id="trust"
+        data-composition-id="trust"
+        data-composition-src="compositions/trust.html"
+        data-start="9.6"
+        data-duration="2.4"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 16"
       ></div>
       <div
         id="cta"
         data-composition-id="cta"
         data-composition-src="compositions/cta.html"
-        data-start="7.5"
-        data-duration="2.5"
+        data-start="12"
+        data-duration="3"
         data-track-index="1"
         data-track-kind="graphics"
         data-width="1080"
         data-height="1920"
-        style="z-index: 13"
+        style="z-index: 17"
       ></div>
     </div>
     <script>

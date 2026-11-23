@@ -60,11 +60,11 @@
       }
     </style>
     <div id="root" data-composition-id="trust" data-width="1080" data-height="1920">
-      <div id="trust-plate" class="clip" data-start="0" data-duration="2.5">
+      <div id="trust-plate" class="clip" data-start="0" data-duration="2.4">
         <img id="trust-img" src="assets/pan-india.webp" alt="Car carrier truck" />
       </div>
-      <div id="trust-scrim" class="clip" data-start="0" data-duration="2.5"></div>
-      <div id="trust-copy" class="clip" data-start="0" data-duration="2.5">
+      <div id="trust-scrim" class="clip" data-start="0" data-duration="2.4"></div>
+      <div id="trust-copy" class="clip" data-start="0" data-duration="2.4">
         <div id="trust-s1" class="trust-stat">
           <span id="trust-n1" class="trust-num">10,000+</span>
           <span class="trust-label">cars delivered safely</span>
@@ -84,7 +84,7 @@
       // World fades up under the navy flood carried over from the last scene.
       tl.fromTo("#trust-plate", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.inOut" }, 0);
       // Slow camera push on the plate (the world moves, the titles stay still).
-      tl.fromTo("#trust-img", { scale: 1.08 }, { scale: 1.0, duration: 2.5, ease: "power2.inOut" }, 0);
+      tl.fromTo("#trust-img", { scale: 1.08 }, { scale: 1.0, duration: 2.4, ease: "power2.inOut" }, 0);
       tl.fromTo(
         ".trust-stat",
         { opacity: 0, filter: "blur(8px)" },
@@ -108,7 +108,7 @@
         0.1,
       );
       // Exit: colour flood to orange for the CTA.
-      tl.to("#trust-copy", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power3.in" }, 2.2);
+      tl.to("#trust-copy", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power3.in" }, 2.1);
       window.__timelines["trust"] = tl;
     </script>
   </template>
