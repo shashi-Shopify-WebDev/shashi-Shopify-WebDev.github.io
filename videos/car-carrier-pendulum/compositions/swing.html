@@ -1,0 +1,226 @@
+<html
+  data-composition-variables='[
+    {"id":"q1","type":"string","label":"Question 1","default":"Need to shift your car?"},
+    {"id":"q2","type":"string","label":"Question 2","default":"Patna to any city?"},
+    {"id":"q3","type":"string","label":"Question 3","default":"Worried about scratches?"},
+    {"id":"q4","type":"string","label":"Question 4","default":"Need IBA approved bills?"},
+    {"id":"answer","type":"string","label":"Answer","default":"We got you."},
+    {"id":"final","type":"string","label":"Final line","default":"Whatever your car needs, we got you."}
+  ]'
+>
+  <template>
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        font-family: "Archivo Black", sans-serif;
+      }
+      #swing-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 75% 55% at 50% 45%,
+          #f9ac4c 0%,
+          #f28c1e 55%,
+          #d06f0a 100%
+        );
+      }
+      #swing-brand {
+        position: absolute;
+        left: 50%;
+        top: 1600px;
+        width: 380px;
+        height: 73px;
+        margin-left: -190px;
+        background: #0f2a4a;
+        -webkit-mask: url("assets/logo.png") center / contain no-repeat;
+        mask: url("assets/logo.png") center / contain no-repeat;
+      }
+      #swing-words {
+        position: absolute;
+        inset: 0;
+      }
+      .st {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+      }
+      .st span {
+        display: block;
+        width: 520px;
+        margin-top: -40px;
+        margin-left: -40px;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 74px;
+        line-height: 1.02;
+        letter-spacing: -0.01em;
+        color: #0f2a4a;
+        text-wrap: balance;
+      }
+      .st.ans span {
+        color: #ffffff;
+        text-shadow: 0 5px 16px rgba(15, 42, 74, 0.55);
+        font-size: 104px;
+        line-height: 0.98;
+      }
+      .st.fin span {
+        color: #ffffff;
+        text-shadow: 0 5px 16px rgba(15, 42, 74, 0.55);
+        font-size: 70px;
+      }
+      .st.fin span em {
+        font-style: normal;
+        color: #0f2a4a;
+        text-shadow: none;
+      }
+      /* Pendulum: a zero-size pivot above the frame; GSAP rotates it. */
+      #pend {
+        position: absolute;
+        left: 540px;
+        top: -360px;
+        width: 0;
+        height: 0;
+      }
+      #pend-string {
+        position: absolute;
+        left: -3px;
+        top: 0;
+        width: 6px;
+        height: 1576px;
+        background: #111;
+        box-shadow: 10px 14px 10px rgba(0, 0, 0, 0.22);
+      }
+      #pend-ring {
+        position: absolute;
+        left: -22px;
+        top: 1560px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 7px solid #c9ced6;
+        box-sizing: border-box;
+      }
+      #pend-tag {
+        position: absolute;
+        left: -140px;
+        top: 1590px;
+        width: 280px;
+        height: 170px;
+        border-radius: 36px;
+        background: #0f2a4a;
+        box-shadow: 14px 18px 22px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #pend-hole {
+        position: absolute;
+        left: 50%;
+        top: 14px;
+        width: 22px;
+        height: 22px;
+        margin-left: -11px;
+        border-radius: 50%;
+        background: #d06f0a;
+      }
+      #pend-logo {
+        width: 236px;
+        height: auto;
+        margin-top: 26px;
+      }
+    </style>
+    <div id="root" data-composition-id="swing" data-width="1080" data-height="1920">
+      <div id="swing-bg" class="clip" data-start="0" data-duration="11.4"></div>
+      <div id="swing-brand" class="clip" data-start="0" data-duration="11.4" data-layout-ignore></div>
+
+      <div id="swing-words" class="clip" data-start="0" data-duration="11.4" data-layout-allow-overlap>
+        <div id="st0" class="st"><span data-var-text="q1">Need to shift your car?</span></div>
+        <div id="st1" class="st ans"><span data-var-text="answer">We got you.</span></div>
+        <div id="st2" class="st"><span data-var-text="q2">Patna to any city?</span></div>
+        <div id="st3" class="st ans"><span data-var-text="answer">We got you.</span></div>
+        <div id="st4" class="st"><span data-var-text="q3">Worried about scratches?</span></div>
+        <div id="st5" class="st ans"><span data-var-text="answer">We got you.</span></div>
+        <div id="st6" class="st"><span data-var-text="q4">Need IBA approved bills?</span></div>
+        <div id="st7" class="st ans"><span data-var-text="answer">We got you.</span></div>
+        <div id="st8" class="st fin"><span>Whatever your car needs, <em>we got you.</em></span></div>
+      </div>
+
+      <div id="pend" class="clip" data-start="0" data-duration="11.4" data-layout-allow-overflow data-layout-ignore>
+        <div id="pend-string"></div>
+        <div id="pend-ring"></div>
+        <div id="pend-tag">
+          <div id="pend-hole"></div>
+          <img id="pend-logo" src="assets/logo.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Pendulum: a half swing takes HALF seconds (2 beats at 100 BPM).
+      const HALF = 1.2;
+      const AMP = (15 * Math.PI) / 180;
+      const PX = 540, PY = -360;
+      const STATES = 9;
+      const stEls = Array.from({ length: STATES }, (_, i) => document.getElementById("st" + i));
+
+      function halfPlane(theta, side) {
+        // Line through the pivot along the string; side +1 = right of the string.
+        const dx = Math.sin(theta), dy = Math.cos(theta);
+        const nx = dy * side, ny = -dx * side;
+        const F = 4000;
+        const a = [PX - dx * F, PY - dy * F];
+        const b = [PX + dx * F, PY + dy * F];
+        const c = [b[0] + nx * F, b[1] + ny * F];
+        const d = [a[0] + nx * F, a[1] + ny * F];
+        return `polygon(${a[0]}px ${a[1]}px, ${b[0]}px ${b[1]}px, ${c[0]}px ${c[1]}px, ${d[0]}px ${d[1]}px)`;
+      }
+
+      function render(t) {
+        const theta = AMP * Math.cos((Math.PI * t) / HALF);
+        gsap.set("#pend", { rotation: (-theta * 180) / Math.PI, transformOrigin: "0px 0px" });
+        const k = Math.floor(t / HALF);
+        // Swing k starts on the right when k is even; the side it has swept shows the next state.
+        const swept = k % 2 === 0 ? 1 : -1;
+        stEls.forEach((el, i) => {
+          if (k >= STATES - 1) {
+            el.style.opacity = i === STATES - 1 ? 1 : 0;
+            el.style.clipPath = "none";
+          } else if (i === k) {
+            el.style.opacity = 1;
+            el.style.clipPath = halfPlane(theta, -swept);
+          } else if (i === k + 1) {
+            el.style.opacity = 1;
+            el.style.clipPath = halfPlane(theta, swept);
+          } else {
+            el.style.opacity = 0;
+          }
+        });
+      }
+
+      const clock = { t: 0 };
+      render(0);
+      tl.fromTo(
+        clock,
+        { t: 0 },
+        { t: 11.4, duration: 11.4, ease: "none", onUpdate: () => render(clock.t) },
+        0,
+      );
+
+      // Exit: the keytag grows past the frame and becomes the navy end card.
+      tl.fromTo(
+        "#pend-tag",
+        { scale: 1 },
+        { scale: 30, duration: 0.45, ease: "power3.in", transformOrigin: "50% 50%" },
+        10.95,
+      );
+      tl.fromTo("#pend-logo", { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "power2.in" }, 10.95);
+      window.__timelines["swing"] = tl;
+    </script>
+  </template>
+</html>

@@ -1,0 +1,129 @@
+<html
+  data-composition-variables='[
+    {"id":"end-name","type":"string","label":"Business name","default":"Patna Car Carrier Services"},
+    {"id":"end-phone","type":"string","label":"Phone","default":"+91 93342 65955"},
+    {"id":"end-site","type":"string","label":"Website","default":"carcarrierservices.in"},
+    {"id":"end-services","type":"string","label":"Services","default":"Car Transport | Enclosed Carrier | Doorstep Pickup | IBA Bills | Pan-India"}
+  ]'
+>
+  <template>
+    <style>
+      #root {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        font-family: "Montserrat", sans-serif;
+        color: #fff;
+      }
+      #end-ground {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 80% 60% at 50% 45%, #17395f 0%, #0f2a4a 60%, #0a1d33 100%);
+      }
+      #end-grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.16;
+      }
+      #end-copy {
+        position: absolute;
+        left: 120px;
+        top: 560px;
+        width: 660px;
+        text-align: center;
+      }
+      #end-logo {
+        display: block;
+        width: 600px;
+        height: auto;
+        margin: 0 auto;
+      }
+      #end-name {
+        display: block;
+        margin-top: 34px;
+        font-weight: 700;
+        font-size: 32px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      #end-rule {
+        width: 480px;
+        height: 2px;
+        margin: 40px auto 0;
+        background: rgba(255, 255, 255, 0.35);
+      }
+      #end-phone {
+        display: inline-block;
+        margin-top: 44px;
+        padding: 20px 40px;
+        border-radius: 16px;
+        background: #f28c1e;
+        color: #0f2a4a;
+        font-weight: 900;
+        font-size: 56px;
+        white-space: nowrap;
+      }
+      #end-site {
+        display: block;
+        margin-top: 30px;
+        font-weight: 700;
+        font-size: 44px;
+      }
+      #end-services {
+        display: block;
+        margin-top: 40px;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 1.45;
+        color: #d9e3f0;
+        text-wrap: balance;
+      }
+    </style>
+    <div id="root" data-composition-id="endcard" data-width="1080" data-height="1920">
+      <div id="end-ground" class="clip" data-start="0" data-duration="3.6"></div>
+      <svg id="end-grain" class="clip" data-start="0" data-duration="3.6" data-layout-ignore width="1080" height="1920" viewBox="0 0 1080 1920">
+        <filter id="end-noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="1080" height="1920" filter="url(#end-noise)" />
+      </svg>
+      <div id="end-copy" class="clip" data-start="0" data-duration="3.6">
+        <img id="end-logo" src="assets/logo.png" alt="Car Carrier Services" />
+        <span id="end-name" data-var-text="end-name">Patna Car Carrier Services</span>
+        <div id="end-rule"></div>
+        <span id="end-phone" data-var-text="end-phone">+91 93342 65955</span>
+        <span id="end-site" data-var-text="end-site">carcarrierservices.in</span>
+        <span id="end-services" data-var-text="end-services">Car Transport | Enclosed Carrier | Doorstep Pickup | IBA Bills | Pan-India</span>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(
+        "#end-logo",
+        { scale: 1.12, opacity: 0, filter: "blur(10px)" },
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "expo.out" },
+        0.05,
+      );
+      tl.fromTo(
+        ["#end-name", "#end-rule"],
+        { opacity: 0, filter: "blur(6px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out", stagger: 0.08 },
+        0.15,
+      );
+      tl.fromTo(
+        "#end-phone",
+        { opacity: 0, scale: 0.85 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" },
+        0.22,
+      );
+      tl.fromTo(
+        ["#end-site", "#end-services"],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.2, ease: "power2.out", stagger: 0.06 },
+        0.3,
+      );
+      window.__timelines["endcard"] = tl;
+    </script>
+  </template>
+</html>
