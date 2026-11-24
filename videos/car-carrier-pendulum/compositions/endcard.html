@@ -1,6 +1,7 @@
 <html
   data-composition-variables='[
-    {"id":"end-name","type":"string","label":"Business name","default":"Patna Car Carrier Services"},
+    {"id":"end-owner","type":"string","label":"Owner name","default":"Mahesh Singh"},
+    {"id":"end-owner-title","type":"string","label":"Owner title","default":"Proprietor & Founder · Since 1997"},
     {"id":"end-phone","type":"string","label":"Phone","default":"+91 93342 65955"},
     {"id":"end-site","type":"string","label":"Website","default":"carcarrierservices.in"},
     {"id":"end-services","type":"string","label":"Services","default":"Car Transport | Enclosed Carrier | Doorstep Pickup | IBA Bills | Pan-India"}
@@ -18,60 +19,91 @@
       #end-ground {
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse 80% 60% at 50% 45%, #17395f 0%, #0f2a4a 60%, #0a1d33 100%);
+        background: radial-gradient(ellipse 80% 60% at 50% 50%, #17395f 0%, #0f2a4a 60%, #0a1d33 100%);
       }
       #end-grain {
         position: absolute;
         inset: 0;
         opacity: 0.16;
       }
+      /* Full-frame column, centred both ways. */
       #end-copy {
         position: absolute;
-        left: 120px;
-        top: 560px;
-        width: 660px;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         text-align: center;
+        padding-bottom: 430px;
       }
       #end-logo {
         display: block;
-        width: 600px;
+        width: 480px;
         height: auto;
-        margin: 0 auto;
+        /* the PNG has transparent space on its right; nudge so the artwork is centred */
+        margin-left: 130px;
       }
-      #end-name {
+      #end-photo {
+        position: relative;
+        margin-top: 40px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 8px solid #f28c1e;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+        background: #0f2a4a;
+      }
+      /* Head-and-shoulders crop of the 800x1614 portrait. */
+      #end-photo-img {
+        position: absolute;
+        left: -282px;
+        top: -78px;
+        width: 680px;
+        height: auto;
+      }
+      #end-owner {
         display: block;
-        margin-top: 34px;
-        font-weight: 700;
-        font-size: 32px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+        margin-top: 26px;
+        font-weight: 800;
+        font-size: 52px;
+        letter-spacing: 0.02em;
+      }
+      #end-owner-title {
+        display: block;
+        margin-top: 6px;
+        font-weight: 600;
+        font-size: 30px;
+        color: #f9ac4c;
       }
       #end-rule {
-        width: 480px;
+        width: 460px;
         height: 2px;
-        margin: 40px auto 0;
+        margin-top: 30px;
         background: rgba(255, 255, 255, 0.35);
       }
       #end-phone {
         display: inline-block;
-        margin-top: 44px;
-        padding: 20px 40px;
+        margin-top: 32px;
+        padding: 18px 40px;
         border-radius: 16px;
         background: #f28c1e;
         color: #0f2a4a;
         font-weight: 900;
-        font-size: 56px;
+        font-size: 58px;
         white-space: nowrap;
       }
       #end-site {
         display: block;
-        margin-top: 30px;
+        margin-top: 28px;
         font-weight: 700;
         font-size: 44px;
       }
       #end-services {
         display: block;
-        margin-top: 40px;
+        width: 680px;
+        margin-top: 30px;
         font-weight: 600;
         font-size: 30px;
         line-height: 1.45;
@@ -90,7 +122,11 @@
       </svg>
       <div id="end-copy" class="clip" data-start="0" data-duration="3.6">
         <img id="end-logo" src="assets/logo.png" alt="Car Carrier Services" />
-        <span id="end-name" data-var-text="end-name">Patna Car Carrier Services</span>
+        <div id="end-photo">
+          <img id="end-photo-img" src="assets/mahesh-singh.jpg" alt="Mahesh Singh" />
+        </div>
+        <span id="end-owner" data-var-text="end-owner">Mahesh Singh</span>
+        <span id="end-owner-title" data-var-text="end-owner-title">Proprietor &amp; Founder · Since 1997</span>
         <div id="end-rule"></div>
         <span id="end-phone" data-var-text="end-phone">+91 93342 65955</span>
         <span id="end-site" data-var-text="end-site">carcarrierservices.in</span>
@@ -101,27 +137,34 @@
       const tl = gsap.timeline({ paused: true });
       tl.fromTo(
         "#end-logo",
-        { scale: 1.12, opacity: 0, filter: "blur(10px)" },
-        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "expo.out" },
+        { opacity: 0, filter: "blur(8px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power4.out" },
         0.05,
       );
+      // Owner photo lands slightly large and settles.
       tl.fromTo(
-        ["#end-name", "#end-rule"],
+        "#end-photo",
+        { opacity: 0, scale: 1.25 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" },
+        0.12,
+      );
+      tl.fromTo(
+        ["#end-owner", "#end-owner-title", "#end-rule"],
         { opacity: 0, filter: "blur(6px)" },
-        { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out", stagger: 0.08 },
-        0.15,
+        { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out", stagger: 0.06 },
+        0.3,
       );
       tl.fromTo(
         "#end-phone",
         { opacity: 0, scale: 0.85 },
         { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" },
-        0.22,
+        0.42,
       );
       tl.fromTo(
         ["#end-site", "#end-services"],
         { opacity: 0 },
         { opacity: 1, duration: 0.2, ease: "power2.out", stagger: 0.06 },
-        0.3,
+        0.5,
       );
       window.__timelines["endcard"] = tl;
     </script>
